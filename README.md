@@ -5,13 +5,13 @@ PyPDFCrafter: Die All-in-One PDF-Lösung für modernes Dokumentenmanagement. Ver
 PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermöglicht grundlegende Operationen wie das Zusammenfügen mehrerer PDFs, das Aufteilen von Dokumenten und die Verschlüsselung zum Schutz vertraulicher Informationen. Die benutzerfreundliche CustomTkinter-Oberfläche macht komplexe PDF-Bearbeitungen auch für Einsteiger zugänglich.
 
 ## Funktionen
-- **PDF-Zusammenführung**
-- **PDF-Aufteilung**
-- **PDF-Verschlüsselung**
-- **Benutzerfreundliche Oberfläche**
-- **Drag & Drop-Unterstützung**
-- **Vorschau-Funktion**
-- **Plattformübergreifend**
+- PDF-Zusammenführung
+- PDF-Aufteilung
+- PDF-Verschlüsselung
+- Benutzerfreundliche Oberfläche
+- Drag & Drop-Unterstützung
+- Vorschau-Funktion
+- Plattformübergreifend
 
 ### Bedienungsanleitung
 1. PDF-Dateien auswählen
@@ -41,7 +41,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 │   │   └── encryptor.py
 │   ├── main.py
 │   └── starter.sh
-├── venv/
+├── .venv/
 │   ├── ...
 |   └── ...
 ├── .git/
@@ -54,7 +54,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 ## Installation
 1. Klone dieses Repository:
    ```
-   git clone https://github.com/YourUsername/PyPDFCrafter
+   git clone https://github.com/Sympa1/PyPDFCrafter
    ```
 2. Navigiere in das Verzeichnis:
    ```
@@ -155,6 +155,3 @@ Dieses Projekt ist unter der GPL-3.0 lizenziert - siehe die [LICENSE](LICENSE)-D
 
 ## Screenshots
 *(Hier könnten Sie Screenshots der Anwendung einfügen)*
-
-## Kontakt
-[Ihre Kontaktinformationen oder GitHub-Profil]

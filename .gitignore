@@ -171,6 +171,4 @@ cython_debug/
 .pypirc
 
 # MyStuff
-.venv
-.env
 
