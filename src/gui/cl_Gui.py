@@ -24,8 +24,9 @@ class Gui(ctk.CTk):
         self.dl_frame = DarkLightmode(self)
         self.dl_frame.grid(row=0, column=1, padx=10, pady=(0, 0), sticky="ne")
 
-        self.button = ctk.CTkButton(self, text="my button", command=self.button_callback)
+        self.button = ctk.CTkButton(self, text="my button", hover=True, command=self.button_callback)
         self.button.grid(row=3, column=0, padx=10, pady=10, sticky="ew")
+
 
     def button_callback(self):
         print("button pressed")
