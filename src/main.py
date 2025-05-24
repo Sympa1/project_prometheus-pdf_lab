@@ -1,6 +1,8 @@
 from gui import Gui
+from classes import Utils
 
 def main():
+    Utils.write_to_log("test log eintrag")
     app = Gui()
     app.mainloop()
 
