@@ -1,7 +1,7 @@
 import customtkinter as ctk
 
 from .cl_MyCheckboxFrame import MyCheckboxFrame
-from .cl_DarkLightmode import DarkLightmode
+from .cl_Theme import Theme
 
 class Gui(ctk.CTk):  
     def __init__(self):
@@ -21,12 +21,8 @@ class Gui(ctk.CTk):
         self.checkbox_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsw")
 
         # Dark / Lightmode Button Frame
-        self.dl_frame = DarkLightmode(self)
-        self.dl_frame.grid(row=0, column=1, padx=10, pady=(0, 0), sticky="ne")
+        self.theme_frame = Theme(self)
+        self.theme_frame.grid(row=0, column=1, padx=0, pady=(0, 5), sticky="ne")
 
-        self.button = ctk.CTkButton(self, text="my button", hover=True, command=self.button_callback)
-        self.button.grid(row=3, column=0, padx=10, pady=10, sticky="ew")
-
-
-    def button_callback(self):
-        print("button pressed")
+        self.button = ctk.CTkButton(self, text="Beenden", hover=True, width=20, command=self.destroy)
+        self.button.grid(row=3, column=1, padx=10, pady=10)
