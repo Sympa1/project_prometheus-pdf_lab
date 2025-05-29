@@ -39,8 +39,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 │   │   ├── merger.py
 │   │   ├── splitter.py
 │   │   └── encryptor.py
-│   ├── main.py
-│   └── starter.sh
+│   └── main.py
 ├── .venv/
 │   ├── ...
 |   └── ...
@@ -50,6 +49,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 ├── error.log
 ├── LICENSE
 ├── README.md
+├── starter.sh
 └── requirements.txt
 ```
 
