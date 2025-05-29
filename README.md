@@ -46,6 +46,8 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 |   └── ...
 ├── .git/
 ├── .gitignore
+├── config.json
+├── error.log
 ├── LICENSE
 ├── README.md
 └── requirements.txt
