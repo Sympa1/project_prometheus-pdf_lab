@@ -1,17 +1,21 @@
 import customtkinter as ctk
 
-from .cl_MyCheckboxFrame import MyCheckboxFrame
+from .cl_MyTabView import MyTabView
 from .cl_Theme import Theme
-from classes import Utils
 from .cl_Messagebox import Messagebox
+from classes import Utils
+
 
 class Gui(ctk.CTk):  
     def __init__(self):
         super().__init__()
-
         self.title("PyPDFCrafter")
+
+        # Grid-Konfiguration direkt nach Fenster-Setup
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
+
         self.config = Utils()
 
         # Fenstergröße aus Config laden
@@ -23,16 +27,17 @@ class Gui(ctk.CTk):
         self.theme_status = f"{self.config.get_config("theme")}"
         ctk.set_appearance_mode(self.theme_status)
 
-        # Checkboxframe
-        self.checkbox_frame = MyCheckboxFrame(self)
-        self.checkbox_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsw")
-
         # Dark / Lightmode Button Frame
+        # Theme-Switch oben rechts in Zeile 0, Spalte 0
         self.theme_frame = Theme(self, self.config)
-        self.theme_frame.grid(row=0, column=1, padx=0, pady=(0, 5), sticky="ne")
+        self.theme_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="ne")
+
+        # TabView direkt darunter in Zeile 1, Spalte 0
+        self.tabview = MyTabView(self)
+        self.tabview.grid(row=1, column=0, padx=10, pady=(0, 0), sticky="nsew")
 
         self.button = ctk.CTkButton(self, text="Beenden", hover=True, width=20, command=self.on_close)
-        self.button.grid(row=3, column=1, padx=10, pady=10)
+        self.button.grid(row=3, column=0, padx=10, pady=10, sticky="se")
 
         # Nach dem Aufbau prüfen ob config neu erstellt wurde
         self.after(100, self.check_config_created)
