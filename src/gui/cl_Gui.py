@@ -1,6 +1,6 @@
 import customtkinter as ctk
 
-from .cl_MyTabView import MyTabView
+from .cl_TabView import TabView
 from .cl_Theme import Theme
 from .cl_Messagebox import Messagebox
 from classes import Utils
@@ -33,7 +33,7 @@ class Gui(ctk.CTk):
         self.theme_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="ne")
 
         # TabView direkt darunter in Zeile 1, Spalte 0
-        self.tabview = MyTabView(self)
+        self.tabview = TabView(self)
         self.tabview.grid(row=1, column=0, padx=10, pady=(0, 0), sticky="nsew")
 
         self.button = ctk.CTkButton(self, text="Beenden", hover=True, width=20, command=self.on_close)
