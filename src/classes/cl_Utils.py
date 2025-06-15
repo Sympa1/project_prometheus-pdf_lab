@@ -14,7 +14,7 @@ class Utils():
 
     @staticmethod # das später noch anpassen
     def write_to_log(message, log_file_name="error.log"):
-        """Schreibt mit Zeitstempel, einen String in eine \"Log\" Datei."""
+        """Schreibt mit Zeitstempel, einen String in eine \"Log\" Datei. Ist eine  statische Methode, da sie nicht auf Instanzvariablen zugreift."""
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         log_entry = f"{timestamp} - {message}\n"
 
@@ -22,7 +22,7 @@ class Utils():
             f.write(log_entry)
 
     def load_config(self):
-        """Liest die Configdatei ein."""
+        """Liest die config.json ein. Wenn die Datei nicht existiert, wird eine neue erstellt mit Standardwerten."""
         try:
             with open(self.filename, 'r') as f:
                 self.data = json.load(f)
@@ -46,10 +46,10 @@ class Utils():
             json.dump(self.data, f, indent=2)
     
     def get_config(self, key):
-        """Hole wert."""
+        """Gibt den Wert für den angegebenen Schlüssel zurück, oder None, wenn der Schlüssel nicht existiert."""
         return self.data.get(key)
     
     def set_config(self, key, value):
-        """Setze wert und speichere."""
+        """Setzt den Wert für den angegebenen Schlüssel und speichert die config.json."""
         self.data[key] = value
         self.save_config()

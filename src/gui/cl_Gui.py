@@ -47,6 +47,7 @@ class Gui(ctk.CTk):
         self.protocol("WM_DELETE_WINDOW", self.on_close)
 
     def check_config_created(self):
+        """Prüft, ob die Konfigurationsdatei erstellt wurde und zeigt eine Info-Messagebox an."""
         if getattr(self.config, "config_created", False):
             Messagebox("Info", "Die Konfigurationsdatei 'config.json' wurde nicht gefunden. Standardwerte wurden gesetzt.").messagebox_info()
 
