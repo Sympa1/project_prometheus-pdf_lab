@@ -5,6 +5,8 @@ from .cl_Messagebox import Messagebox
 
 # TODO: Implementiere die Logik zum Mergen von PDFs im Backend.
 # Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
+# TODO: Eine Wrapper Methode für das Mergen von PDFs könnte hier sinnvoll sein, da der Button nacheinander mehere Aufgaben ausführen soll.
+# Den Speicherort der gemergen PDF-Datei abfragen, die Dateien zusammenführen, die Datei speichern und dann eine Messagebox anzeigen.
 
 class TabMergen(ctk.CTkFrame):
     def __init__(self, master):

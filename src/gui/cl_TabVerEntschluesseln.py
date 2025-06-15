@@ -5,6 +5,7 @@ from .cl_Messagebox import Messagebox
 
 # TODO: Implementiere die Logik zum Verschlüsseln und Entschlüsseln von PDFs im Backend.
 # Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
+# TODO. Ggf. wird wie beim Mergen eine Wrapper-Methode für das Verschlüsseln/Entschlüsseln von PDFs sinnvoll sein.
 # TODO:Ggf. einen PW Generator hinzufügen, um sichere Passwörter zu generieren. Oder eine Funktion, die prüft, ob das Passwort stark genug ist.
 
 class TabVerEntschluesseln(ctk.CTkFrame):
