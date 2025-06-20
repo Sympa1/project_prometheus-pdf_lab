@@ -7,6 +7,7 @@ from .cl_Messagebox import Messagebox
 # Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
 # TODO. Ggf. wird wie beim Mergen eine Wrapper-Methode für das Verschlüsseln/Entschlüsseln von PDFs sinnvoll sein.
 # TODO:Ggf. einen PW Generator hinzufügen, um sichere Passwörter zu generieren. Oder eine Funktion, die prüft, ob das Passwort stark genug ist.
+# TODO: Passwortauschlusskriterien wie kein Passwort wie beispielsweise 123456789 oder hallo. Ebenfalls eine mindest länge vorgeben.
 
 class TabVerEntschluesseln(ctk.CTkFrame):
     def __init__(self, master):
