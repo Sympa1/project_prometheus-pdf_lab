@@ -9,10 +9,10 @@ class Utils():
     def __init__(self, filename = "config.json"):
         self.filename = filename
         self.data = {}
-        self.config_created = False  # <--- Flag hinzufügen
-        self.load_config() # lädt automatisch die Config beim erstellen des Objektes
+        self.config_created = False  # Flag hinzufügen, um zu prüfen, ob die config.json neu erstellt wurde
+        self.load_config() # lädt automatisch die config.json beim erstellen des Objektes
 
-    @staticmethod # das später noch anpassen
+    @staticmethod # TODO: das später noch anpassen
     def write_to_log(message, log_file_name="error.log"):
         """Schreibt mit Zeitstempel, einen String in eine \"Log\" Datei. Ist eine  statische Methode, da sie nicht auf Instanzvariablen zugreift."""
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -27,7 +27,7 @@ class Utils():
             with open(self.filename, 'r') as f:
                 self.data = json.load(f)
         except FileNotFoundError as e:
-            # Default values wenn datei nicht existiert
+            # default Werte wenn die Datei nicht existiert
             self.data = {
                 "debug": False,
                 "theme": "dark",
@@ -41,7 +41,7 @@ class Utils():
             self.config_created = True
 
     def save_config(self):
-        """Speichere config in Datei."""
+        """Speichert die aktuelle Konfiguration in der config.json."""
         with open(self.filename, 'w') as f:
             json.dump(self.data, f, indent=2)
     
