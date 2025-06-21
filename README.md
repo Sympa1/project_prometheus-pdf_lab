@@ -43,14 +43,19 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 ├── .venv/
 │   ├── ...
 |   └── ...
+├── tests/
+│   ├── test1.pdf
+│   ├── test2.pdf
+│   ├── testMerged.pdf
+│   └── test_cl_PdfUtility.py
 ├── .git/
 ├── .gitignore
 ├── config.json
 ├── error.log
 ├── LICENSE
 ├── README.md
-├── starter.sh
-└── requirements.txt
+├── requirements.txt
+└── starter.sh
 ```
 
 ## Installation

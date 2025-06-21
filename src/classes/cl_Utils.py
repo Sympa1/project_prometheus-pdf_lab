@@ -2,7 +2,7 @@ import os
 import json
 
 from datetime import datetime
-from gui.cl_Messagebox import Messagebox
+
 
 class Utils():
     """Hilfsklasse."""

@@ -1,7 +1,10 @@
 import customtkinter as ctk
 from tkinter import filedialog
 import os
-from .cl_Messagebox import Messagebox
+
+from classes.cl_PdfUtility import PdfUtility
+from gui import Messagebox
+
 
 # TODO: Implementiere die Logik zum Mergen von PDFs im Backend.
 # Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
