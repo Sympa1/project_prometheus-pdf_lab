@@ -5,6 +5,9 @@ from classes.cl_PdfUtility import PdfUtility
 from .cl_Messagebox import Messagebox
 from classes.cl_Utils import Utils
 
+# TODO: Ich brauche einen "reset" der PDF Liste nach einem splitten per Button
+# TODO: Eine Progressbar für den Splittenprozess
+# TODO: Code optmieren
 
 class TabSplitten(ctk.CTkFrame):
     def __init__(self, master):

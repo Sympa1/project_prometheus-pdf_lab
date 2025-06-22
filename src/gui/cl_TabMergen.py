@@ -5,12 +5,9 @@ from classes.cl_PdfUtility import PdfUtility
 from .cl_Messagebox import Messagebox
 from classes.cl_Utils import Utils
 
-# TODO: Implementiere die Logik zum Mergen von PDFs im Backend.
-#  Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
-# TODO: Eine Wrapper Methode für das Mergen von PDFs könnte hier sinnvoll sein, da der Button nacheinander mehrere
-#  Aufgaben ausführen soll.
-#  Den Speicherort der gemergen PDF-Datei abfragen, die Dateien zusammenführen, die Datei speichern und dann eine
-#  Messagebox anzeigen.
+# TODO: Ich brauche einen "reset" der PDF Liste nach einem merge
+# TODO: Eine Progressbar für den Mergeprozess
+# TODO: Code an splitten Tab anpassen
 
 class TabMergen(ctk.CTkFrame):
     def __init__(self, master):
