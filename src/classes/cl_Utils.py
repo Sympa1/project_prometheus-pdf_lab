@@ -1,10 +1,8 @@
-import os
 import json
-
 from datetime import datetime
 
 
-class Utils():
+class Utils:
     """Hilfsklasse."""
     def __init__(self, filename = "config.json"):
         self.filename = filename
@@ -14,10 +12,10 @@ class Utils():
 
     @staticmethod # TODO: das später noch anpassen
     def write_to_log(message, log_file_name="error.log"):
-        """Schreibt mit Zeitstempel, einen String in eine \"Log\" Datei. Ist eine  statische Methode, da sie nicht auf Instanzvariablen zugreift."""
+        """Schreibt mit Zeitstempeln, einen String in eine \"Log\" Datei. Ist eine statische Methode, da sie nicht auf
+        Instanzvariablen zugreift."""
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         log_entry = f"{timestamp} - {message}\n"
-
         with open(log_file_name, 'a', encoding='utf-8') as f:
             f.write(log_entry)
 

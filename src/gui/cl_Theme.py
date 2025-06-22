@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import os
 from PIL import Image
 from classes import Utils
 
@@ -7,14 +8,21 @@ class Theme(ctk.CTkFrame):
         super().__init__(master)
         self.config = config
 
-        # Hintergrund wie Hauptfenster
+        # hintergrund wie Hauptfenster
         self.configure(fg_color=master.cget("fg_color")) 
 
-        # Bilder laden
-        self.sun_image = ctk.CTkImage(Image.open("./data/img/sunny-outline.png"), size=(32, 32))
-        self.moon_image = ctk.CTkImage(Image.open("./data/img/moon-outline.png"), size=(32, 32))
+        # prüfen welcher Pfad genommen werden muss (VS Code oder PyCharm)
+        if os.path.exists("./data/img/sunny-outline.png") and os.path.exists("./data/img/moon-outline.png"):
+            # bilder laden
+            self.sun_image = ctk.CTkImage(Image.open("./data/img/sunny-outline.png"), size=(32, 32))
+            self.moon_image = ctk.CTkImage(Image.open("./data/img/moon-outline.png"), size=(32, 32))
+        elif os.path.exists("../data/img/sunny-outline.png") and os.path.exists("../data/img/moon-outline.png"):
+            self.sun_image = ctk.CTkImage(Image.open("../data/img/sunny-outline.png"), size=(32, 32))
+            self.moon_image = ctk.CTkImage(Image.open("../data/img/moon-outline.png"), size=(32, 32))
+        else:
+            Utils.write_to_log("Bilder nicht gefunden!")
 
-        # Inner Frame ohne Dehnung
+        # Innerer Frame ohne Dehnung
         self.inner_frame = ctk.CTkFrame(self, fg_color="transparent", width=80, height=40)
         self.inner_frame.pack(padx=0, pady=0, anchor="w")
         self.inner_frame.pack_propagate(False)  

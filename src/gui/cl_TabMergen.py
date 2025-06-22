@@ -1,15 +1,16 @@
 import customtkinter as ctk
 from tkinter import filedialog
 import os
-
 from classes.cl_PdfUtility import PdfUtility
-from gui import Messagebox
+from .cl_Messagebox import Messagebox
 
 
 # TODO: Implementiere die Logik zum Mergen von PDFs im Backend.
-# Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
-# TODO: Eine Wrapper Methode für das Mergen von PDFs könnte hier sinnvoll sein, da der Button nacheinander mehere Aufgaben ausführen soll.
-# Den Speicherort der gemergen PDF-Datei abfragen, die Dateien zusammenführen, die Datei speichern und dann eine Messagebox anzeigen.
+#  Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
+# TODO: Eine Wrapper Methode für das Mergen von PDFs könnte hier sinnvoll sein, da der Button nacheinander mehrere
+#  Aufgaben ausführen soll.
+#  Den Speicherort der gemergen PDF-Datei abfragen, die Dateien zusammenführen, die Datei speichern und dann eine
+#  Messagebox anzeigen.
 
 class TabMergen(ctk.CTkFrame):
     def __init__(self, master):
@@ -25,14 +26,14 @@ class TabMergen(ctk.CTkFrame):
         self.add_button.pack(anchor="w", padx=10, pady=(10, 0))
 
         # Textbox zur Anzeige der hinzugefügten PDF-Dateipfade
-        # Die Größe orientiert sich an der Fenstergröße
+        # die Größe orientiert sich an der Fenstergröße
         textbox_width = max(window_width - 60, 300)
         textbox_height = max(int(window_height / 2), 100)
         self.listbox = ctk.CTkTextbox(self, height=textbox_height, width=textbox_width)
         self.listbox.pack(anchor="w", padx=10, pady=(10, 0), fill="x") # fill=x sorgt für ein responsive anmutendes Verhalten
         self.listbox.configure(state="disabled")
 
-        # Button zum Starten des Mergings der PDFs
+        # Button zum Starten des mergen's der PDFs
         self.merge_button = ctk.CTkButton(self, text="PDFs zusammenführen", command=self.merge_pdfs)
         self.merge_button.pack(anchor="e", padx=10, pady=(15, 10))
 
@@ -63,7 +64,7 @@ class TabMergen(ctk.CTkFrame):
         self.listbox.configure(state="disabled")
 
     def merge_pdfs(self):
-        # Öffne Filedialog für den Zielspeicherort der zusammengeführten PDF
+        # Öffne Filedialog für den Zielspeicherort des zusammengeführten PDFs
         documents_dir = os.path.expanduser("~/Dokumente")
         if not os.path.exists(documents_dir):
             documents_dir = os.path.expanduser("~/Documents")
@@ -73,7 +74,13 @@ class TabMergen(ctk.CTkFrame):
             filetypes=[("PDF-Dateien", "*.pdf")],
             initialdir=documents_dir
         )
-        if save_path:
+
+        # TODO: Macht ein if else hier Sinn? Wenn der Nutzer keinen Speicherort auswählt, wird
+        #  die Funktion abgebrochen und es wird keine Messagebox angezeigt.
+        #if save_path:
             # Hier würdest du das eigentliche Mergen der PDFs implementieren
-            # Rückmeldung an den Nutzer per Messagebox
-            Messagebox("PDF zusammenführen", f"PDFs würden gemerged und gespeichert unter:\n{save_path}").messagebox_info()
+        PdfUtility.merge_pdf(self.file_list, save_path)
+
+        # Rückmeldung an den Nutzer per Messagebox
+        Messagebox("PDF zusammenführen", f"PDFs würden gemerged und gespeichert"
+                                         f"unter:\n{save_path}").messagebox_info()
