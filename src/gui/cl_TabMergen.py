@@ -3,7 +3,7 @@ from tkinter import filedialog
 import os
 from classes.cl_PdfUtility import PdfUtility
 from .cl_Messagebox import Messagebox
-
+from classes.cl_Utils import Utils
 
 # TODO: Implementiere die Logik zum Mergen von PDFs im Backend.
 #  Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
@@ -63,7 +63,7 @@ class TabMergen(ctk.CTkFrame):
             self.listbox.insert("end", file + "\n")
         self.listbox.configure(state="disabled")
 
-    def merge_pdfs(self):
+    def mergee_pdfs(self):
         # Öffne Filedialog für den Zielspeicherort des zusammengeführten PDFs
         documents_dir = os.path.expanduser("~/Dokumente")
         if not os.path.exists(documents_dir):
@@ -79,8 +79,34 @@ class TabMergen(ctk.CTkFrame):
         #  die Funktion abgebrochen und es wird keine Messagebox angezeigt.
         #if save_path:
             # Hier würdest du das eigentliche Mergen der PDFs implementieren
-        PdfUtility.merge_pdf(self.file_list, save_path)
+    def merge_pdfs(self):
+        # prüfen ob die Liste leer(null) ist
+        if not self.file_list:
+            Messagebox("PDF zusammenführen", "Keine PDF-Dateien zum Zusammenführen ausgewählt.").messagebox_warning()
+            return
 
-        # Rückmeldung an den Nutzer per Messagebox
-        Messagebox("PDF zusammenführen", f"PDFs würden gemerged und gespeichert"
-                                         f"unter:\n{save_path}").messagebox_info()
+        # Öffne Filedialog für den Zielspeicherort des zusammengeführten PDFs
+        documents_dir = os.path.expanduser("~/Dokumente")
+        if not os.path.exists(documents_dir):
+            documents_dir = os.path.expanduser("~/Documents")
+        save_path = filedialog.asksaveasfilename(
+            title="Ziel-PDF speichern",
+            defaultextension=".pdf",
+            filetypes=[("PDF-Dateien", "*.pdf")],
+            initialdir=documents_dir
+        )
+
+        # prüfen ob der string nicht leer (null) ist
+        if save_path:
+            try:
+                # merge der PDFs
+                PdfUtility.merge_pdf(self.file_list, save_path)
+
+                # Rückmeldung an den User, dass die PDFs germeged wurden
+                Messagebox("PDF zusammenführen", f"PDFs wurden erfolgreich zusammengeführt und gespeichert"
+                                                 f"unter:\n{save_path}").messagebox_info()
+            except Exception as e:
+                # Fehlermeldung falls beim Mergen etwas schiefgeht
+                Messagebox("Fehler", f"Fehler beim Zusammenführen der PDFs:\n{str(e)}").messagebox_error()
+                Utils.write_to_log(f"Fehler beim Zusammenführen der PDFs:\n{str(e)}")
+        # Wenn save_path leer ist (Dialog abgebrochen), passiert nichts 
