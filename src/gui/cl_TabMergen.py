@@ -5,7 +5,6 @@ from classes.cl_PdfUtility import PdfUtility
 from .cl_Messagebox import Messagebox
 from classes.cl_Utils import Utils
 
-
 # TODO: Ich brauche einen "reset" der PDF Liste nach einem merge
 # TODO: Eine Progressbar für den Mergeprozess
 
