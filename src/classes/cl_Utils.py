@@ -29,8 +29,8 @@ class Utils:
             self.data = {
                 "debug": False,
                 "theme": "dark",
-                "window_width": 800,
-                "window_height": 600
+                "window_width": 1130,
+                "window_height": 757,       
             }
             self.save_config()
 

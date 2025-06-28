@@ -7,19 +7,32 @@ from classes.cl_Utils import Utils
 
 # TODO: Ich brauche einen "reset" der PDF Liste nach einem splitten per Button
 # TODO: Eine Progressbar für den Splittenprozess
-# TODO: Code optmieren
+# TODO: Code optimieren
 
 class TabSplitten(ctk.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.input_pdf = None
-        self.output_part1 = None
-        self.output_part2 = None
-        self.pdf_utility = PdfUtility()
+    """
+    Tab-Klasse für das Splitten von PDF-Dateien.
+    Erbt von ctk.CTkFrame und stellt die GUI-Komponenten für die PDF-Split-Funktionalität bereit.
+    """
 
-        # Hole die Fensterbreite und -höhe aus der Config (über das Hauptfenster)
+    def __init__(self, master):
+        """
+        Initialisiert den TabSplitten Frame mit allen GUI-Elementen.
+
+        Args:
+            master: Das übergeordnete Widget.
+        """
+        super().__init__(master)
+        self.input_pdf = None  # Pfad zur ausgewählten PDF-Datei
+        self.output_part1 = None  # Pfad für den ersten Teil der gesplitteten PDF
+        self.output_part2 = None  # Pfad für den zweiten Teil der gesplitteten PDF
+        self.pdf_utility = PdfUtility()  # Utility-Objekt für PDF-Operationen
+
+        # Fensterdimensionen aus der Konfiguration laden
         window_width = getattr(master.master, "window_width", 800)  # Fallback auf 800
         window_height = getattr(master.master, "window_height", 600)  # Fallback auf 600
+
+        # === GUI-ELEMENTE ERSTELLEN ===
 
         # Button zum Auswählen der zu splittenden PDF-Datei
         self.select_file_button = ctk.CTkButton(self, text="PDF zum Splitten auswählen", command=self.select_input_pdf)
@@ -33,7 +46,7 @@ class TabSplitten(ctk.CTkFrame):
         self.page_info_label = ctk.CTkLabel(self, text="")
         self.page_info_label.pack(anchor="w", padx=10, pady=(5, 0))
 
-        # Frame für die Spinbox
+        # Frame für die Spinbox (Seitenzahl zum Splitten)
         self.spinbox_frame = ctk.CTkFrame(self)
         self.spinbox_frame.pack(anchor="w", padx=10, pady=(10, 0))
 
@@ -75,16 +88,18 @@ class TabSplitten(ctk.CTkFrame):
         self.split_button = ctk.CTkButton(self, text="PDF splitten", command=self.split_pdf)
         self.split_button.pack(anchor="e", padx=10, pady=(15, 10))
 
-        # Initial Button deaktivieren
+        # Initial Button deaktivieren (wird erst bei Dateiauswahl aktiviert)
         self.split_button.configure(state="disabled")
 
     def select_input_pdf(self):
-        # Standardverzeichnis: Dokumente-Ordner des Users (deutsch/englisch)
+        """
+        Öffnet einen Dateidialog zur Auswahl einer PDF-Datei, die gesplittet werden soll.
+        Zeigt Dateiname und Seitenzahl an und setzt Standard-Ausgabepfade.
+        """
         documents_dir = os.path.expanduser("~/Dokumente")
         if not os.path.exists(documents_dir):
             documents_dir = os.path.expanduser("~/Documents")  # Fallback für englische Systeme
 
-        # Öffne Dateidialog zur Auswahl einer PDF-Datei
         filename = filedialog.askopenfilename(
             title="PDF zum Splitten auswählen",
             filetypes=[("PDF-Dateien", "*.pdf")],
@@ -93,21 +108,18 @@ class TabSplitten(ctk.CTkFrame):
 
         if filename:
             self.input_pdf = filename
-            # Zeige nur den Dateinamen, nicht den ganzen Pfad
             self.file_label.configure(text=f"Ausgewählt: {os.path.basename(filename)}")
 
             try:
-                # Anzahl der Seiten ermitteln
+                # Seitenzahl ermitteln und anzeigen
                 page_count = self.pdf_utility.get_page_count(filename)
                 self.page_info_label.configure(text=f"Gesamt: {page_count} Seiten")
 
-                # Standardpfade für Output setzen
+                # Standard-Ausgabepfade setzen
                 input_dir = os.path.dirname(filename)
                 base_name = os.path.splitext(os.path.basename(filename))[0]
-
                 self.output_part1 = os.path.join(input_dir, f"{base_name}_part1.pdf")
                 self.output_part2 = os.path.join(input_dir, f"{base_name}_part2.pdf")
-
                 self.output1_label.configure(text=f"Output Teil 1: {base_name}_part1.pdf")
                 self.output2_label.configure(text=f"Output Teil 2: {base_name}_part2.pdf")
 
@@ -122,10 +134,13 @@ class TabSplitten(ctk.CTkFrame):
             self.reset_ui()
 
     def select_output1_pdf(self):
+        """
+        Öffnet einen Dialog zur Auswahl des Speicherorts für den ersten Teil der gesplitteten PDF.
+        Aktualisiert das zugehörige Label.
+        """
         if not self.input_pdf:
             return
 
-        # Standardverzeichnis: Verzeichnis der Input-PDF
         initial_dir = os.path.dirname(self.input_pdf)
         filename = filedialog.asksaveasfilename(
             title="Speicherort für Teil 1",
@@ -139,10 +154,13 @@ class TabSplitten(ctk.CTkFrame):
             self.output1_label.configure(text=f"Output Teil 1: {os.path.basename(filename)}")
 
     def select_output2_pdf(self):
+        """
+        Öffnet einen Dialog zur Auswahl des Speicherorts für den zweiten Teil der gesplitteten PDF.
+        Aktualisiert das zugehörige Label.
+        """
         if not self.input_pdf:
             return
 
-        # Standardverzeichnis: Verzeichnis der Input-PDF
         initial_dir = os.path.dirname(self.input_pdf)
         filename = filedialog.asksaveasfilename(
             title="Speicherort für Teil 2",
@@ -156,6 +174,9 @@ class TabSplitten(ctk.CTkFrame):
             self.output2_label.configure(text=f"Output Teil 2: {os.path.basename(filename)}")
 
     def increase_value(self):
+        """
+        Erhöht den Wert im Seitenzahl-Eingabefeld um 1, solange das Maximum nicht überschritten wird.
+        """
         try:
             current_value = int(self.page_entry.get())
             if self.input_pdf:
@@ -168,6 +189,9 @@ class TabSplitten(ctk.CTkFrame):
             self.page_entry.insert(0, "1")
 
     def decrease_value(self):
+        """
+        Verringert den Wert im Seitenzahl-Eingabefeld um 1, mindestens jedoch auf 1.
+        """
         try:
             current_value = int(self.page_entry.get())
             if current_value > 1:
@@ -178,6 +202,10 @@ class TabSplitten(ctk.CTkFrame):
             self.page_entry.insert(0, "1")
 
     def validate_page_number(self, event=None):
+        """
+        Validiert die Eingabe im Seitenzahl-Eingabefeld.
+        Stellt sicher, dass nur gültige Zahlen eingegeben werden und der Wert im erlaubten Bereich liegt.
+        """
         try:
             value = self.page_entry.get()
             if value:
@@ -201,7 +229,10 @@ class TabSplitten(ctk.CTkFrame):
                 self.page_entry.insert(0, "1")
 
     def split_pdf(self):
-        # Prüfen ob eine PDF ausgewählt wurde
+        """
+        Führt das Splitten der ausgewählten PDF-Datei durch.
+        Validiert die Eingaben, führt den Split-Prozess durch und zeigt entsprechende Rückmeldungen an.
+        """
         if not self.input_pdf:
             Messagebox("PDF splitten", "Keine PDF-Datei zum Splitten ausgewählt.").messagebox_warning()
             return
@@ -213,25 +244,27 @@ class TabSplitten(ctk.CTkFrame):
         try:
             split_at = int(self.page_entry.get())
 
-            # Überprüfen ob die Output-Verzeichnisse existieren
+            # Überprüfen, ob die Output-Verzeichnisse existieren
             os.makedirs(os.path.dirname(self.output_part1), exist_ok=True)
             os.makedirs(os.path.dirname(self.output_part2), exist_ok=True)
 
             # PDF splitten
             PdfUtility.split_pdf(self.input_pdf, self.output_part1, self.output_part2, split_at)
 
-            # Rückmeldung an den User, dass das PDF gesplittet wurde
+            # Erfolgsmeldung an den Benutzer
             Messagebox("PDF splitten", f"PDF wurde erfolgreich gesplittet und gespeichert unter:\n"
                                        f"Teil 1: {self.output_part1}\n"
                                        f"Teil 2: {self.output_part2}").messagebox_info()
 
         except Exception as e:
-            # Fehlermeldung falls beim Splitten etwas schiefgeht
+            # Fehlermeldung bei Problemen während des Split-Prozesses
             Messagebox("Fehler", f"Fehler beim Splitten der PDF:\n{str(e)}").messagebox_error()
             Utils.write_to_log(f"Fehler beim Splitten der PDF:\n{str(e)}")
 
     def reset_ui(self):
-        # Setzt die UI auf den Ausgangszustand zurück
+        """
+        Setzt die UI auf den Ausgangszustand zurück.
+        """
         self.input_pdf = None
         self.output_part1 = None
         self.output_part2 = None
