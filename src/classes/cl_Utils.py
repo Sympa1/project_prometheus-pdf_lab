@@ -11,16 +11,21 @@ class Utils:
         self.load_config() # lädt automatisch die config.json beim erstellen des Objektes
 
     @staticmethod # TODO: das später noch anpassen
-    def write_to_log(message, log_file_name="error.log"):
+    def write_to_log(message: str, log_file_name: str = "error.log"):
         """Schreibt mit Zeitstempeln, einen String in eine \"Log\" Datei. Ist eine statische Methode, da sie nicht auf
-        Instanzvariablen zugreift."""
+        Instanzvariablen zugreift.
+
+        :param str message: Die zu protokollierende Nachricht.
+        :param str log_file_name: Der Name der Protokolldatei, standardmäßig "error.log".
+        """
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         log_entry = f"{timestamp} - {message}\n"
         with open(log_file_name, 'a', encoding='utf-8') as f:
             f.write(log_entry)
 
     def load_config(self):
-        """Liest die config.json ein. Wenn die Datei nicht existiert, wird eine neue erstellt mit Standardwerten."""
+        """Liest die config.json ein. Wenn die Datei nicht existiert, wird eine neue erstellt mit Standardwerten.
+        """
         try:
             with open(self.filename, 'r') as f:
                 self.data = json.load(f)
@@ -43,11 +48,15 @@ class Utils:
         with open(self.filename, 'w') as f:
             json.dump(self.data, f, indent=2)
     
-    def get_config(self, key):
-        """Gibt den Wert für den angegebenen Schlüssel zurück, oder None, wenn der Schlüssel nicht existiert."""
+    def get_config(self, key: str) -> int | str | bool | float | None:
+        """Gibt den Wert für den angegebenen Schlüssel zurück, oder None, wenn der Schlüssel nicht existiert.
+
+        :param str key: Der Schlüssel, dessen Wert abgerufen werden soll.
+        :return int | str | bool | float | None: Der Wert für den angegebenen Schlüssel.
+        """
         return self.data.get(key)
-    
-    def set_config(self, key, value):
+
+    def set_config(self, key: str, value: str | int | bool):
         """Setzt den Wert für den angegebenen Schlüssel und speichert die config.json."""
         self.data[key] = value
         self.save_config()

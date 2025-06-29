@@ -15,11 +15,9 @@ class TabMergen(ctk.CTkFrame):
     """
 
     def __init__(self, master):
-        """
-        Initialisiert den TabMergen Frame mit allen GUI-Elementen.
+        """Initialisiert den TabSplitten Frame mit allen GUI-Elementen.
 
-        Args:
-            master: Das übergeordnete Widget.
+        :param _type_ master: Der Master-Frame, in dem dieser Tab angezeigt wird.
         """
         super().__init__(master)
 
@@ -72,8 +70,7 @@ class TabMergen(ctk.CTkFrame):
         self.merge_button.configure(state="disabled")
 
     def add_file(self):
-        """
-        Öffnet einen Dateidialog zur Auswahl von PDF-Dateien und fügt sie zur Merge-Liste hinzu.
+        """Öffnet einen Dateidialog zur Auswahl von PDF-Dateien und fügt sie zur Merge-Liste hinzu.
         Verhindert das Hinzufügen von Duplikaten und aktualisiert die GUI entsprechend.
         """
         # Standardverzeichnis ermitteln (Dokumente-Ordner)
@@ -106,8 +103,7 @@ class TabMergen(ctk.CTkFrame):
             self.file_label.configure(text="Keine Dateien ausgewählt")
 
     def select_output_path(self):
-        """
-        Öffnet einen Dialog zur Auswahl des Ausgabepfads für die zusammengeführte PDF-Datei.
+        """Öffnet einen Dialog zur Auswahl des Ausgabepfads für die zusammengeführte PDF-Datei.
         Aktualisiert das Output-Label mit dem gewählten Dateinamen.
         """
         # Standardverzeichnis ermitteln
@@ -130,8 +126,7 @@ class TabMergen(ctk.CTkFrame):
             self.output_label.configure(text=f"Output: {filename}")
 
     def update_listbox(self):
-        """
-        Aktualisiert die Textbox mit allen aktuell ausgewählten PDF-Dateipfaden.
+        """Aktualisiert die Textbox mit allen aktuell ausgewählten PDF-Dateipfaden.
         Zeigt jeden Dateipfad in einer separaten Zeile an.
         """
         # Textbox temporär bearbeitbar machen
@@ -148,8 +143,7 @@ class TabMergen(ctk.CTkFrame):
         self.listbox.configure(state="disabled")
 
     def merge_pdfs(self):
-        """
-        Führt die ausgewählten PDF-Dateien zusammen.
+        """Führt die ausgewählten PDF-Dateien zusammen.
         Validiert die Eingaben, führt den Merge-Prozess durch und zeigt entsprechende Rückmeldungen an.
         """
         # Sicherheitsabfrage: Falls keine Dateien ausgewählt wurden, Abbruch und Hinweis anzeigen
