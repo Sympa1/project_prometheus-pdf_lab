@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import filedialog
 import os
 from .cl_Messagebox import Messagebox
+from classes import PdfUtility
 
 # TODO: Implementiere die Logik zum Verschlüsseln und Entschlüsseln von PDFs im Backend.
 # Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
@@ -36,7 +37,7 @@ class TabVerEntschluesseln(ctk.CTkFrame):
         self.encrypt_button.pack(padx=20, pady=(0, 10), anchor="w")
 
         # Button zum Entschlüsseln der PDF
-        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", command=self.decrypt_pdf, width=180)
+        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", width=180)
         self.decrypt_button.pack(padx=20, pady=(0, 20), anchor="w")
 
     def select_pdf(self):
@@ -82,30 +83,15 @@ class TabVerEntschluesseln(ctk.CTkFrame):
             filetypes=[("PDF-Dateien", "*.pdf")],
             initialdir=documents_dir
         )
-        # Zeigt eine Info-Messagebox nach dem (simulierten) Verschlüsseln
+        # Prüft, ob ein Speicherpfad ausgewählt wurde
+        if not save_path:
+            Messagebox("Fehler", "Bitte einen Speicherpfad auswählen!").messagebox_warning()
+            return
+        
+        # Ruft die Verschlüsselungsmethode auf
+        PdfUtility.encrypt_pdf(self.selected_file, save_path, password)
+
+        # Zeigt eine Info-Messagebox nach dem Verschlüsseln
         if save_path:
             # Hier würdest du das Verschlüsseln implementieren
             Messagebox("PDF verschlüsseln", f"PDF würde verschlüsselt gespeichert unter:\n{save_path}").messagebox_info()
-
-    def decrypt_pdf(self):
-        # Prüft, ob eine Datei und ein Passwort gewählt wurden, und öffnet einen Speichern-Dialog
-        if not self.selected_file:
-            Messagebox("Fehler", "Bitte zuerst eine PDF-Datei auswählen!").messagebox_warning()
-            return
-        password = self.password_entry.get()
-        if not password:
-            Messagebox("Fehler", "Bitte ein Passwort eingeben!").messagebox_warning()
-            return
-        documents_dir = os.path.expanduser("~/Dokumente")
-        if not os.path.exists(documents_dir):
-            documents_dir = os.path.expanduser("~/Documents")
-        save_path = filedialog.asksaveasfilename(
-            title="Entschlüsselte PDF speichern",
-            defaultextension=".pdf",
-            filetypes=[("PDF-Dateien", "*.pdf")],
-            initialdir=documents_dir
-        )
-        # Zeigt eine Info-Messagebox nach dem (simulierten) Entschlüsseln
-        if save_path:
-            # Hier würdest du das Entschlüsseln implementieren
-            Messagebox("PDF entschlüsseln", f"PDF würde entschlüsselt gespeichert unter:\n{save_path}").messagebox_info()
