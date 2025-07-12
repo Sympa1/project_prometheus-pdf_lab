@@ -10,7 +10,7 @@ from classes import PdfUtility
 # TODO:Ggf. einen PW Generator hinzufügen, um sichere Passwörter zu generieren. Oder eine Funktion, die prüft, ob das Passwort stark genug ist.
 # TODO: Passwortauschlusskriterien wie kein Passwort wie beispielsweise 123456789 oder hallo. Ebenfalls eine mindest länge vorgeben.
 
-class TabVerEntschluesseln(ctk.CTkFrame):
+class TabVerschluesseln(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.selected_file = None
@@ -35,10 +35,6 @@ class TabVerEntschluesseln(ctk.CTkFrame):
         # Button zum Verschlüsseln der PDF
         self.encrypt_button = ctk.CTkButton(self, text="PDF verschlüsseln", command=self.encrypt_pdf, width=180)
         self.encrypt_button.pack(padx=20, pady=(0, 10), anchor="w")
-
-        # Button zum Entschlüsseln der PDF
-        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", width=180)
-        self.decrypt_button.pack(padx=20, pady=(0, 20), anchor="w")
 
     def select_pdf(self):
         # Öffnet einen Dateidialog zur Auswahl einer PDF-Datei
