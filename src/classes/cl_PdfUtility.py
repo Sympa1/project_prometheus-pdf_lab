@@ -14,13 +14,6 @@ class PdfUtility:
         reader = PdfReader(file_path)
         return len(reader.pages)
 
-    def extract_text(self, file_path): # TODO: könnte ich später noch für anzeigen im GUI verwenden
-        reader = PdfReader(file_path)
-        text = []
-        for page in reader.pages:
-            text.append(page.extract_text())
-        return "\n".join(text)
-
     def merge_pdf(input_files: list[str], output_file: str):
         """Merged mehrere PDF-Dateien in eine einzelne PDF-Datei und speichert sie unter dem angegebenen Dateipfad.
 
@@ -61,3 +54,19 @@ class PdfUtility:
             writer2.add_page(reader.pages[i])
         with open(output_file2, "wb") as f:
             writer2.write(f)
+
+    def encrypt_pdf(input_file: str, output_file: str, password: str):
+        """Verschlüsselt eine PDF-Datei mit einem Passwort.
+
+        :param str input_file: Der Pfad zur Eingabe-PDF-Datei.
+        :param str output_file: Der Pfad zur Ausgabedatei.
+        :param str password: Das Passwort zum Verschlüsseln der PDF-Datei.
+        :return _type_: None
+        """
+        reader = PdfReader(input_file)
+        writer = PdfWriter()
+        for page in reader.pages:
+            writer.add_page(page)
+        writer.encrypt(user_password=password, use_128bit=True)
+        with open(output_file, "wb") as f:
+            writer.write(f)
