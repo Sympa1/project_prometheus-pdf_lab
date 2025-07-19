@@ -36,6 +36,10 @@ class TabVerschluesseln(ctk.CTkFrame):
         self.encrypt_button = ctk.CTkButton(self, text="PDF verschlüsseln", command=self.encrypt_pdf, width=180)
         self.encrypt_button.pack(padx=20, pady=(0, 10), anchor="w")
 
+        # Button zum Entschlüsseln der PDF (derzeit nicht implementiert)
+        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", command=lambda: Messagebox("Info", "Diese Funktion ist derzeit nicht implementiert.").messagebox_info(), width=180)
+        self.decrypt_button.pack(padx=20, pady=(0, 20), anchor="w")
+
     def select_pdf(self):
         # Öffnet einen Dateidialog zur Auswahl einer PDF-Datei
         documents_dir = os.path.expanduser("~/Dokumente")

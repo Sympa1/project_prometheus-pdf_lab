@@ -70,3 +70,22 @@ class PdfUtility:
         writer.encrypt(user_password=password, use_128bit=True)
         with open(output_file, "wb") as f:
             writer.write(f)
+
+    def decrypt_pdf(input_file: str, output_file: str, password: str):
+        """Entschlüsselt eine PDF-Datei mit einem Passwort.
+
+        :param str input_file: Der Pfad zur verschlüsselten PDF-Datei.
+        :param str output_file: Der Pfad zur entschlüsselten Ausgabedatei.
+        :param str password: Das Passwort zum Entschlüsseln der PDF-Datei.
+        :return _type_: None
+        """
+        reader = PdfReader(input_file)
+        if reader.is_encrypted:
+            reader.decrypt(password)
+            writer = PdfWriter()
+            for page in reader.pages:
+                writer.add_page(page)
+            with open(output_file, "wb") as f:
+                writer.write(f)
+        else:
+            raise ValueError("Die PDF-Datei ist nicht verschlüsselt.")
