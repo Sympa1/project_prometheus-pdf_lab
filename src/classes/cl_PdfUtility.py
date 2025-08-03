@@ -2,6 +2,9 @@
 from PyPDF2 import PdfMerger, PdfReader, PdfWriter
 
 class PdfUtility:
+    """PdfUtility ist eine Klasse, die verschiedene PDF-bezogene Funktionen bereitstellt, wie das Zusammenführen, Teilen, Verschlüsseln und Entschlüsseln von PDF-Dateien.
+    """
+
     def __init__(self):
         self.merger = PdfMerger()
 
@@ -11,6 +14,7 @@ class PdfUtility:
         :param str file_path: Der Pfad zur PDF-Datei.
         :return int: Die Anzahl der Seiten in der PDF-Datei.
         """
+
         reader = PdfReader(file_path)
         return len(reader.pages)
 
@@ -21,6 +25,7 @@ class PdfUtility:
         :param str output_file: Der Pfad zur Ausgabedatei.
         :return _type_: None
         """
+
         writer = PdfWriter()
         for file in input_files:
             reader = PdfReader(file)
@@ -38,6 +43,7 @@ class PdfUtility:
         :param int split_at: Die Seitenzahl, an der die PDF geteilt werden soll.
         :return _type_: None
         """
+
         reader = PdfReader(input_file)
         total_pages = len(reader.pages)
 
@@ -63,6 +69,7 @@ class PdfUtility:
         :param str password: Das Passwort zum Verschlüsseln der PDF-Datei.
         :return _type_: None
         """
+
         reader = PdfReader(input_file)
         writer = PdfWriter()
         for page in reader.pages:
@@ -79,6 +86,7 @@ class PdfUtility:
         :param str password: Das Passwort zum Entschlüsseln der PDF-Datei.
         :return _type_: None
         """
+        
         reader = PdfReader(input_file)
         if reader.is_encrypted:
             reader.decrypt(password)

@@ -4,6 +4,9 @@ from .cl_TabSplitten import TabSplitten
 from .cl_TabVerschluesseln import TabVerschluesseln
 
 class TabView(ctk.CTkTabview):
+    """TabView ist ein Tab-Container, der verschiedene PDF-bezogene Funktionen wie Mergen, Splitten und Verschlüsseln bereitstellt.
+    """
+    
     def __init__(self, master):
         super().__init__(master)
         # Erstelle drei Tabs für die verschiedenen PDF-Funktionen

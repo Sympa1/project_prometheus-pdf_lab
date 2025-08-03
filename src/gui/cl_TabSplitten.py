@@ -15,13 +15,7 @@ class TabSplitten(ctk.CTkFrame):
     """
 
     def __init__(self, master):
-        """Initialisiert den TabSplitten Frame mit allen GUI-Elementen.
-
-        :param _type_ master: Der Master-Frame, in dem dieser Tab angezeigt wird.
-        """
         super().__init__(master)
-        """Initialisiert den TabSplitten Frame.
-        """
         self.input_pdf = None  # Pfad zur aktuell ausgewählten PDF-Datei
         self.output_part1 = None  # Pfad für den ersten Teil der gesplitteten PDF
         self.output_part2 = None  # Pfad für den zweiten Teil der gesplitteten PDF
@@ -95,6 +89,7 @@ class TabSplitten(ctk.CTkFrame):
         """Öffnet einen Dateidialog zur Auswahl einer PDF-Datei, die gesplittet werden soll.
         Zeigt Dateiname und Seitenzahl an und setzt Standard-Ausgabepfade.
         """
+
         documents_dir = os.path.expanduser("~/Dokumente")  # Standardverzeichnis für Dokumente
         if not os.path.exists(documents_dir):
             documents_dir = os.path.expanduser("~/Documents")  # Fallback für englische Systeme
@@ -135,6 +130,7 @@ class TabSplitten(ctk.CTkFrame):
         """Öffnet einen Dialog zur Auswahl des Speicherorts für den ersten Teil der gesplitteten PDF.
         Aktualisiert das zugehörige Label.
         """
+
         if not self.input_pdf:
             return  # Keine Eingabedatei ausgewählt, daher abbrechen
 
@@ -154,6 +150,7 @@ class TabSplitten(ctk.CTkFrame):
         """Öffnet einen Dialog zur Auswahl des Speicherorts für den zweiten Teil der gesplitteten PDF.
         Aktualisiert das zugehörige Label.
         """
+
         if not self.input_pdf:
             return  # Keine Eingabedatei ausgewählt, daher abbrechen
 
@@ -173,6 +170,7 @@ class TabSplitten(ctk.CTkFrame):
         """Erhöht den Wert im Seitenzahl-Eingabefeld um 1, solange das Maximum nicht überschritten wird.
         Prüft, ob eine PDF geladen ist und verhindert, dass der Wert über die maximale Seitenzahl hinausgeht.
         """
+
         try:
             current_value = int(self.page_entry.get())  # Aktuellen Wert holen
             if self.input_pdf:
@@ -187,6 +185,7 @@ class TabSplitten(ctk.CTkFrame):
     def decrease_value(self):
         """Verringert den Wert im Seitenzahl-Eingabefeld um 1, mindestens jedoch auf 1.
         """
+
         try:
             current_value = int(self.page_entry.get())  # Aktuellen Wert holen
             if current_value > 1:
@@ -200,6 +199,7 @@ class TabSplitten(ctk.CTkFrame):
         """Validiert die Eingabe im Seitenzahl-Eingabefeld.
         Stellt sicher, dass nur gültige Zahlen eingegeben werden und der Wert im erlaubten Bereich liegt.
         """
+
         try:
             value = self.page_entry.get()  # Aktuellen Wert aus dem Eingabefeld holen
             if value:
@@ -226,6 +226,7 @@ class TabSplitten(ctk.CTkFrame):
         """Führt das Splitten der ausgewählten PDF-Datei durch.
         Validiert die Eingaben, führt den Split-Prozess durch und zeigt entsprechende Rückmeldungen an.
         """
+
         # Prüfen, ob eine Eingabedatei gesetzt ist
         if not self.input_pdf:
             Messagebox("PDF splitten", "Keine PDF-Datei zum Splitten ausgewählt.").messagebox_warning()  # Warnung anzeigen
@@ -262,6 +263,7 @@ class TabSplitten(ctk.CTkFrame):
     def reset_ui(self):
         """Setzt alle Labels, Eingabefelder und Variablen auf die Standardwerte zurück.
         """
+        
         self.input_pdf = None  # Eingabepfad zurücksetzen
         self.output_part1 = None  # Ausgabepfad Teil 1 zurücksetzen
         self.output_part2 = None  # Ausgabepfad Teil 2 zurücksetzen

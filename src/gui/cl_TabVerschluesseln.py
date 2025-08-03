@@ -4,13 +4,13 @@ import os
 from .cl_Messagebox import Messagebox
 from classes import PdfUtility
 
-# TODO: Implementiere die Logik zum Verschlüsseln und Entschlüsseln von PDFs im Backend.
-# Aktuell ist es nur eine Simulation, die eine Messagebox anzeigt.
-# TODO. Ggf. wird wie beim Mergen eine Wrapper-Methode für das Verschlüsseln/Entschlüsseln von PDFs sinnvoll sein.
 # TODO:Ggf. einen PW Generator hinzufügen, um sichere Passwörter zu generieren. Oder eine Funktion, die prüft, ob das Passwort stark genug ist.
 # TODO: Passwortauschlusskriterien wie kein Passwort wie beispielsweise 123456789 oder hallo. Ebenfalls eine mindest länge vorgeben.
 
 class TabVerschluesseln(ctk.CTkFrame):
+    """TabVerschluesseln ist ein Frame für die GUI, der es ermöglicht, PDF-Dateien zu verschlüsseln und zu entschlüsseln.
+    """
+    
     def __init__(self, master):
         super().__init__(master)
         self.selected_file = None
@@ -41,7 +41,8 @@ class TabVerschluesseln(ctk.CTkFrame):
         self.decrypt_button.pack(padx=20, pady=(0, 20), anchor="w")
 
     def select_pdf(self):
-        # Öffnet einen Dateidialog zur Auswahl einer PDF-Datei
+        """Öffnet einen Dateidialog zur Auswahl einer PDF-Datei."""
+
         documents_dir = os.path.expanduser("~/Dokumente")
         if not os.path.exists(documents_dir):
             documents_dir = os.path.expanduser("~/Documents")
@@ -59,14 +60,16 @@ class TabVerschluesseln(ctk.CTkFrame):
             self.file_label.configure(text="Keine Datei ausgewählt")
 
     def toggle_password(self):
-        # Zeigt oder verbirgt das Passwort im Eingabefeld je nach Checkbox-Status
+        """Zeigt oder verbirgt das Passwort im Eingabefeld je nach Checkbox-Status"""
+
         if self.show_pw_var.get():
             self.password_entry.configure(show="")
         else:
             self.password_entry.configure(show="*")
 
     def encrypt_pdf(self):
-        # Prüft, ob eine Datei und ein Passwort gewählt wurden, und öffnet einen Speichern-Dialog
+        """Öffnet einen Speichern-Dialog zum Speichern der verschlüsselten PDF."""
+
         if not self.selected_file:
             Messagebox("Fehler", "Bitte zuerst eine PDF-Datei auswählen!").messagebox_warning()
             return
@@ -97,7 +100,8 @@ class TabVerschluesseln(ctk.CTkFrame):
             Messagebox("PDF verschlüsseln", f"PDF würde verschlüsselt gespeichert unter:\n{save_path}").messagebox_info()
 
     def decrypt_pdf(self):
-        # Prüft, ob eine Datei und ein Passwort gewählt wurden, und öffnet einen Speichern-Dialog
+        """Öffnet einen Speichern-Dialog zum Speichern der entschlüsselten PDF."""
+
         if not self.selected_file:
             Messagebox("Fehler", "Bitte zuerst eine verschlüsselte PDF-Datei auswählen!").messagebox_warning()
             return

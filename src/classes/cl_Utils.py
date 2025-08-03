@@ -18,6 +18,7 @@ class Utils:
         :param str message: Die zu protokollierende Nachricht.
         :param str log_file_name: Der Name der Protokolldatei, standardmäßig "error.log".
         """
+        
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         log_entry = f"{timestamp} - {message}\n"
         with open(log_file_name, 'a', encoding='utf-8') as f:
@@ -26,6 +27,7 @@ class Utils:
     def load_config(self):
         """Liest die config.json ein. Wenn die Datei nicht existiert, wird eine neue erstellt mit Standardwerten.
         """
+
         try:
             with open(self.filename, 'r') as f:
                 self.data = json.load(f)
@@ -44,7 +46,9 @@ class Utils:
             self.config_created = True
 
     def save_config(self):
-        """Speichert die aktuelle Konfiguration in der config.json."""
+        """Speichert die aktuelle Konfiguration in der config.json.
+        """
+
         with open(self.filename, 'w') as f:
             json.dump(self.data, f, indent=2)
     
@@ -54,9 +58,12 @@ class Utils:
         :param str key: Der Schlüssel, dessen Wert abgerufen werden soll.
         :return int | str | bool | float | None: Der Wert für den angegebenen Schlüssel.
         """
+
         return self.data.get(key)
 
     def set_config(self, key: str, value: str | int | bool):
-        """Setzt den Wert für den angegebenen Schlüssel und speichert die config.json."""
+        """Setzt den Wert für den angegebenen Schlüssel und speichert die config.json.
+        """
+
         self.data[key] = value
         self.save_config()

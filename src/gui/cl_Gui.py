@@ -48,12 +48,16 @@ class Gui(ctk.CTk):
         self.protocol("WM_DELETE_WINDOW", self.on_close)
 
     def check_config_created(self):
-        """Prüft, ob die Konfigurationsdatei erstellt wurde und zeigt eine Info-Messagebox an."""
+        """Prüft, ob die Konfigurationsdatei erstellt wurde und zeigt eine Info-Messagebox an.
+        """
+
         if getattr(self.config, "config_created", False):
             Messagebox("Info", "Die Konfigurationsdatei 'config.json' wurde nicht gefunden. Standardwerte wurden gesetzt.").messagebox_info()
 
     def on_close(self):
-        """Wird beim Schließen des Fensters aufgerufen. Speichert die aktuelle Fenstergröße."""
+        """Wird beim Schließen des Fensters aufgerufen. Speichert die aktuelle Fenstergröße.
+        """
+        
         width = self.winfo_width()
         height = self.winfo_height()
         self.config.set_config("window_width", width)

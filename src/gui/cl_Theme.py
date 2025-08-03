@@ -4,6 +4,9 @@ from PIL import Image
 from classes import Utils
 
 class Theme(ctk.CTkFrame):  
+    """Theme ist ein Frame, der es ermöglicht, zwischen Dark und Light Mode zu wechseln.
+    """
+    
     def __init__(self, master, config):
         super().__init__(master)
         self.config = config
@@ -49,6 +52,9 @@ class Theme(ctk.CTkFrame):
             self.theme_status = "light"
 
     def toggle_mode(self):
+        """Toggle um zwischen Dark und Light Mode wechseln.
+        """
+
         if self.switch.get() == 1:
             self.theme_status = "dark"
             ctk.set_appearance_mode("dark")

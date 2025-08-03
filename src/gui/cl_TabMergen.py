@@ -15,12 +15,7 @@ class TabMergen(ctk.CTkFrame):
     """
 
     def __init__(self, master):
-        """Initialisiert den TabSplitten Frame mit allen GUI-Elementen.
-
-        :param _type_ master: Der Master-Frame, in dem dieser Tab angezeigt wird.
-        """
         super().__init__(master)
-
         # Instanzvariablen initialisieren
         self.file_list = []  # Liste der ausgewählten PDF-Dateien
         self.output_path = None  # Pfad für die Ausgabedatei
@@ -73,6 +68,7 @@ class TabMergen(ctk.CTkFrame):
         """Öffnet einen Dateidialog zur Auswahl von PDF-Dateien und fügt sie zur Merge-Liste hinzu.
         Verhindert das Hinzufügen von Duplikaten und aktualisiert die GUI entsprechend.
         """
+
         # Standardverzeichnis ermitteln (Dokumente-Ordner)
         # unterstützt deutsche und englische Systemlokalisierung
         documents_dir = os.path.expanduser("~/Dokumente")
@@ -106,6 +102,7 @@ class TabMergen(ctk.CTkFrame):
         """Öffnet einen Dialog zur Auswahl des Ausgabepfads für die zusammengeführte PDF-Datei.
         Aktualisiert das Output-Label mit dem gewählten Dateinamen.
         """
+
         # Standardverzeichnis ermitteln
         documents_dir = os.path.expanduser("~/Dokumente")
         if not os.path.exists(documents_dir):
@@ -129,6 +126,7 @@ class TabMergen(ctk.CTkFrame):
         """Aktualisiert die Textbox mit allen aktuell ausgewählten PDF-Dateipfaden.
         Zeigt jeden Dateipfad in einer separaten Zeile an.
         """
+
         # Textbox temporär bearbeitbar machen
         self.listbox.configure(state="normal")
 
@@ -146,6 +144,7 @@ class TabMergen(ctk.CTkFrame):
         """Führt die ausgewählten PDF-Dateien zusammen.
         Validiert die Eingaben, führt den Merge-Prozess durch und zeigt entsprechende Rückmeldungen an.
         """
+        
         # Sicherheitsabfrage: Falls keine Dateien ausgewählt wurden, Abbruch und Hinweis anzeigen
         if not self.file_list:
             Messagebox("PDF zusammenführen", "Keine PDF-Dateien zum Zusammenführen ausgewählt.").messagebox_warning()
