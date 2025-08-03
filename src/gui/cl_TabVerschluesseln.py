@@ -37,7 +37,7 @@ class TabVerschluesseln(ctk.CTkFrame):
         self.encrypt_button.pack(padx=20, pady=(0, 10), anchor="w")
 
         # Button zum Entschlüsseln der PDF (derzeit nicht implementiert)
-        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", command=lambda: Messagebox("Info", "Diese Funktion ist derzeit nicht implementiert.").messagebox_info(), width=180)
+        self.decrypt_button = ctk.CTkButton(self, text="PDF entschlüsseln", command=self.decrypt_pdf, width=180)
         self.decrypt_button.pack(padx=20, pady=(0, 20), anchor="w")
 
     def select_pdf(self):
@@ -95,3 +95,31 @@ class TabVerschluesseln(ctk.CTkFrame):
         if save_path:
             # Hier würdest du das Verschlüsseln implementieren
             Messagebox("PDF verschlüsseln", f"PDF würde verschlüsselt gespeichert unter:\n{save_path}").messagebox_info()
+
+    def decrypt_pdf(self):
+        # Prüft, ob eine Datei und ein Passwort gewählt wurden, und öffnet einen Speichern-Dialog
+        if not self.selected_file:
+            Messagebox("Fehler", "Bitte zuerst eine verschlüsselte PDF-Datei auswählen!").messagebox_warning()
+            return
+        password = self.password_entry.get()
+        if not password:
+            Messagebox("Fehler", "Bitte das Passwort zum Entschlüsseln eingeben!").messagebox_warning()
+            return
+        documents_dir = os.path.expanduser("~/Dokumente")
+        if not os.path.exists(documents_dir):
+            documents_dir = os.path.expanduser("~/Documents")
+        save_path = filedialog.asksaveasfilename(
+            title="Entschlüsselte PDF speichern",
+            defaultextension=".pdf",
+            filetypes=[("PDF-Dateien", "*.pdf")],
+            initialdir=documents_dir
+        )
+        if not save_path:
+            Messagebox("Fehler", "Bitte einen Speicherpfad auswählen!").messagebox_warning()
+            return
+
+        try:
+            PdfUtility.decrypt_pdf(self.selected_file, save_path, password)
+            Messagebox("PDF entschlüsseln", f"PDF wurde entschlüsselt gespeichert unter:\n{save_path}").messagebox_info()
+        except Exception as e:
+            Messagebox("Fehler", f"Fehler beim Entschlüsseln der PDF:\n{str(e)}").messagebox_error()
