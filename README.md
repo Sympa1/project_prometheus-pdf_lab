@@ -7,8 +7,6 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 - PDF-Aufteilung
 - PDF-Verschlüsselung
 - Benutzerfreundliche Oberfläche
-- Drag & Drop-Unterstützung
-- Vorschau-Funktion
 - Plattformübergreifend
 
 ## Roadmap
@@ -20,8 +18,8 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 - Verlinkung zum GitHub Repository
 
 ## Bedienungsanleitung
-1. PDF-Dateien auswählen
-2. Gewünschte Operation wählen (Zusammenfügen, Aufteilen, Verschlüsseln)
+1. Gewünschte Operation wählen (Zusammenfügen, Aufteilen, Verschlüsseln)
+2. PDF-Dateien auswählen
 3. Zieloptionen konfigurieren (Ausgabeverzeichnis, Passwort, etc.)
 4. "Ausführen" klicken und PDF-Bearbeitung starten
 
@@ -76,7 +74,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 3. Virtuelles Environment einrichten:
    ```bash
    # Windows
-   python -m venv venv
+   python -m venv .venv
    venv\Scripts\activate
    
    # macOS/Linux
@@ -87,19 +85,6 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
    ```bash
    pip install -r requirements.txt
    ```
-
-## Umgebungsvariablen
-Die Anwendung unterstützt optionale Umgebungsvariablen für erweiterte Konfigurationen. Diese können in einer `.env`-Datei im Hauptverzeichnis gespeichert werden.
-
-Beispiel für eine `.env`-Datei:
-```
-# Ausgabepfad für verarbeitete PDFs
-OUTPUT_DIR=/pfad/zum/ausgabeverzeichnis
-
-# UI-Einstellungen
-THEME_MODE=dark  # oder "light", "system"
-PRIMARY_COLOR=#1E88E5
-```
 
 ## .gitignore
 Die folgende `.gitignore`-Datei wird verwendet:
@@ -146,12 +131,6 @@ Thumbs.db
 ```bash
 # Mit aktiviertem virtualenv
 python main.py
-```
-
-### Als ausführbare Datei erstellen
-```bash
-# Mit PyInstaller
-pyinstaller --onefile --windowed --icon=assets/icon.png main.py
 ```
 
 ## Bekannte Probleme
