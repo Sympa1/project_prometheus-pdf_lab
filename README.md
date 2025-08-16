@@ -26,7 +26,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 ## Voraussetzungen
 - Python 3.8+
 - pip
-- virtualenv (empfohlen)
+- virtualenv (empfohlen) 
 
 ## Verzeichnisstruktur
 ```
