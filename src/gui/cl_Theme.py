@@ -1,34 +1,46 @@
 import customtkinter as ctk
 import os
+import sys
 from PIL import Image
 from classes import Utils
 
-class Theme(ctk.CTkFrame):  
+
+def resource_path(relative_path: str) -> str:
+    """
+    Liefert den absoluten Pfad zu einer Resource.
+    Funktioniert sowohl beim normalen Start (VSCode/PyCharm)
+    als auch bei PyInstaller (--onefile).
+    """
+    if hasattr(sys, "_MEIPASS"):  # PyInstaller Temp-Ordner
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+
+class Theme(ctk.CTkFrame):
     """Theme ist ein Frame, der es ermöglicht, zwischen Dark und Light Mode zu wechseln.
     """
-    
     def __init__(self, master, config):
         super().__init__(master)
         self.config = config
 
-        # hintergrund wie Hauptfenster
-        self.configure(fg_color=master.cget("fg_color")) 
+        # Hintergrund wie Hauptfenster
+        self.configure(fg_color=master.cget("fg_color"))
 
-        # prüfen welcher Pfad genommen werden muss (VS Code oder PyCharm)
-        if os.path.exists("./data/img/sunny-outline.png") and os.path.exists("./data/img/moon-outline.png"):
-            # bilder laden
-            self.sun_image = ctk.CTkImage(Image.open("./data/img/sunny-outline.png"), size=(32, 32))
-            self.moon_image = ctk.CTkImage(Image.open("./data/img/moon-outline.png"), size=(32, 32))
-        elif os.path.exists("../data/img/sunny-outline.png") and os.path.exists("../data/img/moon-outline.png"):
-            self.sun_image = ctk.CTkImage(Image.open("../data/img/sunny-outline.png"), size=(32, 32))
-            self.moon_image = ctk.CTkImage(Image.open("../data/img/moon-outline.png"), size=(32, 32))
-        else:
-            Utils.write_to_log("Bilder nicht gefunden!")
+        try:
+            sun_path = resource_path("data/img/sunny-outline.png")
+            moon_path = resource_path("data/img/moon-outline.png")
+
+            self.sun_image = ctk.CTkImage(Image.open(sun_path), size=(32, 32))
+            self.moon_image = ctk.CTkImage(Image.open(moon_path), size=(32, 32))
+        except Exception as e:
+            Utils.write_to_log(f"Bilder nicht gefunden! {e}")
+            self.sun_image = None
+            self.moon_image = None
 
         # Innerer Frame ohne Dehnung
         self.inner_frame = ctk.CTkFrame(self, fg_color="transparent", width=80, height=40)
         self.inner_frame.pack(padx=0, pady=0, anchor="w")
-        self.inner_frame.pack_propagate(False)  
+        self.inner_frame.pack_propagate(False)
 
         # Switch
         self.switch = ctk.CTkSwitch(self.inner_frame, text="", hover=True, command=self.toggle_mode)
@@ -42,26 +54,27 @@ class Theme(ctk.CTkFrame):
         theme_from_config = self.config.get_config("theme")
         if theme_from_config == "dark":
             self.switch.select()  # Switch AN
-            self.image_label.configure(image=self.moon_image)
+            if self.moon_image:
+                self.image_label.configure(image=self.moon_image)
             ctk.set_appearance_mode("dark")
             self.theme_status = "dark"
         else:
             self.switch.deselect()  # Switch AUS
-            self.image_label.configure(image=self.sun_image)
+            if self.sun_image:
+                self.image_label.configure(image=self.sun_image)
             ctk.set_appearance_mode("light")
             self.theme_status = "light"
 
     def toggle_mode(self):
-        """Toggle um zwischen Dark und Light Mode wechseln.
-        """
-
         if self.switch.get() == 1:
             self.theme_status = "dark"
             ctk.set_appearance_mode("dark")
-            self.image_label.configure(image=self.moon_image)
+            if self.moon_image:
+                self.image_label.configure(image=self.moon_image)
         else:
             self.theme_status = "light"
             ctk.set_appearance_mode("light")
-            self.image_label.configure(image=self.sun_image)
+            if self.sun_image:
+                self.image_label.configure(image=self.sun_image)
 
         self.config.set_config("theme", self.theme_status)
