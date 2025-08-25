@@ -141,6 +141,7 @@ python main.py
 - PyPDF2 3.0.1
 - Pillow 10.1.0
 - PyInstaller 6.1.0 (optional, für ausführbare Dateien)
+   --> `pyinstaller --onefile --windowed --icon=data/img/document.ico --hidden-import=customtkinter --add-data "data/img;data/img" src/main.py`
 
 ## Lizenz
 Dieses Projekt ist unter der GPL-3.0 lizenziert - siehe die [LICENSE](LICENSE)-Datei für Details.
