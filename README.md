@@ -1,6 +1,6 @@
 # Project Prometheus - PDF Lab
 
-PDF Lab dient der grundlegenden Beabreitung wie das Zusammenfügen mehrerer PDFs, das Aufteilen von PDFs und die Verschlüsselung zum Schutz vertraulicher Informationen.
+PDF Lab dient der grundlegenden Beabreitung, wie das Zusammenfügen mehrerer PDFs, das Aufteilen von PDFs und die Verschlüsselung zum Schutz vertraulicher Informationen.
 
 ## Funktionen
 - PDF-Zusammenführung
