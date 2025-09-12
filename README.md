@@ -1,27 +1,19 @@
-# PyPDFCrafter
+# Project Prometheus - PDF Lab
 
-PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermöglicht grundlegende Operationen wie das Zusammenfügen mehrerer PDFs, das Aufteilen von Dokumenten und die Verschlüsselung zum Schutz vertraulicher Informationen.
+PDF Lab dient der ermöglicht grundlegende Operationen wie das Zusammenfügen mehrerer PDFs, das Aufteilen von Dokumenten und die Verschlüsselung zum Schutz vertraulicher Informationen.
 
 ## Funktionen
 - PDF-Zusammenführung
 - PDF-Aufteilung
 - PDF-Verschlüsselung
 - Benutzerfreundliche Oberfläche
-- Plattformübergreifend
 
 ## Roadmap
-- Passwort-Sicherheitsanalyse mit Echtzeit-Bewertung
 - Multithreading für bessere Performance bei großen Dateien
 - Fortschrittsanzeige (Progressbars) für alle Operationen
+- Passwort-Sicherheitsanalyse mit Echtzeit-Bewertung und Anzeige wie sicher das gewählte Passwort ist
 - Ausschluss schwacher Passwörter (123456789, hallo, etc.)
-- Anzeige wie sicher das gewählte Passwort ist
 - Verlinkung zum GitHub Repository
-
-## Bedienungsanleitung
-1. Gewünschte Operation wählen (Zusammenfügen, Aufteilen, Verschlüsseln)
-2. PDF-Dateien auswählen
-3. Zieloptionen konfigurieren (Ausgabeverzeichnis, Passwort, etc.)
-4. "Ausführen" klicken und PDF-Bearbeitung starten
 
 ## Voraussetzungen
 - Python 3.8+
@@ -51,7 +43,6 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
 │   ├── test1.pdf
 │   ├── test2.pdf
 │   ├── testMerged.pdf
-│   └── test_cl_PdfUtility.py
 ├── .git/
 ├── .gitignore
 ├── config.json
@@ -69,7 +60,7 @@ PyPDFCrafter dient der vereinfachten Bearbeitung von PDF-Dokumenten und ermögli
    ```
 2. Navigiere in das Verzeichnis:
    ```
-   cd PyPDFCrafter
+   cd Project_Prometheus-PDF_Lab
    ```
 3. Virtuelles Environment einrichten:
    ```bash
