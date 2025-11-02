@@ -91,4 +91,4 @@ pyinstaller --onefile --windowed --icon=data/img/document.ico --hidden-import=cu
 ```
 
 ## Lizenz
-Dieses Projekt ist unter der GPL-3.0 lizenziert - siehe die [LICENSiiiiiE](LICENSE)-Datei für Details.
+Dieses Projekt ist unter der GPL-3.0 lizenziert - siehe die [LICENSE](LICENSE)-Datei für Details.
